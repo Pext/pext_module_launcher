@@ -13,6 +13,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+import shlex
+
 from os import access, environ, listdir, pathsep, X_OK
 from os.path import isfile, join
 from subprocess import Popen
@@ -36,14 +38,14 @@ class Module(ModuleBase):
                 if isfile(fullname) and access(fullname, X_OK):
                     executables.append(executable)
 
-        self.q.put([Action.replace_entry_list, sorted(executables)])
+        self.q.put([Action.replace_command_list, sorted(executables)])
 
     def stop(self):
         pass
 
     def selection_made(self, selection):
         if len(selection) == 1:
-            Popen(selection[0]["value"])
+            Popen(shlex.split(selection[0]["value"]))
             self.q.put([Action.close])
 
     def process_response(self, response):
