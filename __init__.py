@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+# Copyright (C) 2016 Sylvia van Os <iamsylvie@openmailbox.org>
+#
 # Pext launcher module is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
@@ -39,6 +41,7 @@ class Module(ModuleBase):
                     executables.append(executable)
 
         self.q.put([Action.replace_command_list, sorted(executables)])
+        self.q.put([Action.replace_entry_list, sorted(executables)])
 
     def stop(self):
         pass
