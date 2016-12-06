@@ -27,6 +27,8 @@ from pext_helpers import Action
 
 class Module(ModuleBase):
     def init(self, settings, q):
+        self.executables = []
+
         self.q = q
 
         self._get_entries()
@@ -40,14 +42,18 @@ class Module(ModuleBase):
                 if isfile(fullname) and access(fullname, X_OK):
                     executables.append(executable)
 
-        self.q.put([Action.replace_command_list, sorted(executables)])
-        self.q.put([Action.replace_entry_list, sorted(executables)])
+        self.executables = sorted(executables)
+        self.q.put([Action.replace_command_list, self.executables])
+        self.q.put([Action.replace_entry_list, self.executables])
 
     def stop(self):
         pass
 
     def selection_made(self, selection):
-        if len(selection) == 1:
+        if len(selection) == 0:
+            self.q.put([Action.replace_command_list, self.executables])
+            self.q.put([Action.replace_entry_list, self.executables])
+        elif len(selection) == 1:
             Popen(shlex.split(selection[0]["value"]))
             self.q.put([Action.close])
 
