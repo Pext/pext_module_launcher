@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# Copyright (C) 2016 Sylvia van Os <iamsylvie@openmailbox.org>
+# Copyright (C) 2016 - 2017 Sylvia van Os <sylvia@hackerchick.me>
 #
 # Pext launcher module is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
 import shlex
 
 from os import access, environ, listdir, pathsep, X_OK
-from os.path import isfile, join
+from os.path import expanduser, isfile, join
 from subprocess import Popen
 
 from pext_base import ModuleBase
@@ -37,6 +37,7 @@ class Module(ModuleBase):
         executables = []
 
         for path in environ['PATH'].split(pathsep):
+            path = expanduser(path)
             for executable in listdir(path):
                 fullname = join(path, executable)
                 if isfile(fullname) and access(fullname, X_OK):
