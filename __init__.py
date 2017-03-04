@@ -38,10 +38,13 @@ class Module(ModuleBase):
 
         for path in environ['PATH'].split(pathsep):
             path = expanduser(path)
-            for executable in listdir(path):
-                fullname = join(path, executable)
-                if isfile(fullname) and access(fullname, X_OK):
-                    executables.append(executable)
+            try:
+                for executable in listdir(path):
+                    fullname = join(path, executable)
+                    if isfile(fullname) and access(fullname, X_OK):
+                        executables.append(executable)
+            except OSError:
+                pass
 
         self.executables = sorted(executables)
         self.q.put([Action.replace_command_list, self.executables])
