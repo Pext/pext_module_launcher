@@ -48,7 +48,6 @@ class Module(ModuleBase):
 
         self.executables = sorted(executables)
         self.q.put([Action.replace_command_list, self.executables])
-        self.q.put([Action.replace_entry_list, self.executables])
 
     def stop(self):
         pass
@@ -56,7 +55,6 @@ class Module(ModuleBase):
     def selection_made(self, selection):
         if len(selection) == 0:
             self.q.put([Action.replace_command_list, self.executables])
-            self.q.put([Action.replace_entry_list, self.executables])
         elif len(selection) == 1:
             Popen(shlex.split(selection[0]["value"]))
             self.q.put([Action.close])
