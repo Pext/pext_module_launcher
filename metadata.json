@@ -1,0 +1,11 @@
+{
+  "name": "launcher",
+  "developer": "Sylvia van Os (Pext lead developer)",
+  "description": "Allows Pext to launch applications",
+  "homepage": "https://github.com/Pext/pext_module_launcher",
+  "license": "GPL-3.0+",
+  "download_urls": [
+    "https://github.com/Pext/pext_module_launcher",
+    "https://notabug.org/Pext/pext_module_launcher"
+  ]
+}
