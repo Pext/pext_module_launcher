@@ -4,7 +4,7 @@
   "description": "Allows Pext to launch applications",
   "homepage": "https://pext.hackerchick.me/",
   "license": "GPL-3.0+",
-  "download_urls": [
+  "git_urls": [
     "https://github.com/Pext/pext_module_launcher",
     "https://notabug.org/Pext/pext_module_launcher"
   ]
