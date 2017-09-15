@@ -15,6 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+import html
 import shlex
 
 from os import access, environ, listdir, pathsep, X_OK
@@ -28,35 +29,53 @@ from pext_helpers import Action
 class Module(ModuleBase):
     def init(self, settings, q):
         self.executables = []
+        self.info_panels = {}
+        self.context_menus = {}
 
+        self.settings = settings
         self.q = q
 
         self._get_entries()
 
     def _get_entries(self):
-        executables = []
-
         for path in environ['PATH'].split(pathsep):
             path = expanduser(path)
             try:
                 for executable in listdir(path):
                     fullname = join(path, executable)
                     if isfile(fullname) and access(fullname, X_OK):
-                        executables.append(executable)
+                        if not executable in self.executables:
+                            self.executables.append(executable)
+                            self.info_panels[executable] = "<b>{}</b>".format(html.escape(fullname))
+                            self.context_menus[executable] = [fullname]
+                        else:
+                            self.info_panels[executable] += "<br/>{}".format(html.escape(fullname))
+                            self.context_menus[executable].append(fullname)
+
             except OSError:
                 pass
 
-        self.executables = sorted(executables)
+        self.executables.sort()
+        self._set_entries()
+
+    def _set_entries(self):
         self.q.put([Action.replace_command_list, self.executables])
+        self.q.put([Action.replace_command_info_dict, self.info_panels])
+        self.q.put([Action.replace_command_context_dict, self.context_menus])
 
     def stop(self):
         pass
 
     def selection_made(self, selection):
         if len(selection) == 0:
-            self.q.put([Action.replace_command_list, self.executables])
+            self._set_entries()
         elif len(selection) == 1:
-            Popen(shlex.split(selection[0]["value"]))
+            command = shlex.split(selection[0]["value"])
+            if self.settings['_api_version'] >= [0, 4, 0]:
+                if selection[0]['context_option']:
+                    command[0] = selection[0]['context_option']
+
+            Popen(command)
             self.q.put([Action.close])
 
     def process_response(self, response):
