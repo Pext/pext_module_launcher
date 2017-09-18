@@ -60,8 +60,9 @@ class Module(ModuleBase):
 
     def _set_entries(self):
         self.q.put([Action.replace_command_list, self.executables])
-        self.q.put([Action.replace_command_info_dict, self.info_panels])
-        self.q.put([Action.replace_command_context_dict, self.context_menus])
+        if self.settings['_api_version'] >= [0, 5, 0]:
+            self.q.put([Action.replace_command_info_dict, self.info_panels])
+            self.q.put([Action.replace_command_context_dict, self.context_menus])
 
     def stop(self):
         pass
