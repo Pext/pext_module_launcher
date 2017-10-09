@@ -18,7 +18,7 @@
 import html
 import shlex
 
-from os import access, environ, listdir, pathsep, X_OK
+from os import access, environ, listdir, name, pathsep, X_OK
 from os.path import expanduser, isfile, join
 from subprocess import Popen
 
@@ -43,7 +43,14 @@ class Module(ModuleBase):
             try:
                 for executable in listdir(path):
                     fullname = join(path, executable)
-                    if isfile(fullname) and access(fullname, X_OK):
+                    if isfile(fullname):
+                        if name == 'nt':
+                            if not executable.endswith('.exe'):
+                                continue
+                        else:
+                            if not access(fullname, X_OK):
+                                continue
+
                         if not executable in self.executables:
                             self.executables.append(executable)
                             self.info_panels[executable] = "<b>{}</b>".format(html.escape(fullname))
