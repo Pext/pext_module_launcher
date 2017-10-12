@@ -7,5 +7,10 @@
   "git_urls": [
     "https://github.com/Pext/pext_module_launcher",
     "https://notabug.org/Pext/pext_module_launcher"
+  ],
+  "platforms": [
+    "Linux",
+    "Darwin",
+    "Windows"
   ]
 }
