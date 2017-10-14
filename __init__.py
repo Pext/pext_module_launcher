@@ -16,9 +16,10 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import html
+import platform
 import shlex
 
-from os import access, environ, listdir, name, pathsep, X_OK
+from os import access, environ, listdir, pathsep, X_OK
 from os.path import expanduser, isfile, join
 from subprocess import Popen
 
@@ -44,7 +45,7 @@ class Module(ModuleBase):
                 for executable in listdir(path):
                     fullname = join(path, executable)
                     if isfile(fullname):
-                        if name == 'nt':
+                        if platform.system() == 'Windows':
                             if not executable.endswith('.exe'):
                                 continue
                         else:
