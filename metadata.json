@@ -1,12 +1,11 @@
 {
-  "name": "launcher",
+  "name": "App Launcher",
   "developer": "Sylvia van Os (Pext lead developer)",
-  "description": "Allows Pext to launch applications",
+  "description": "Allows Pext to launch applications from your computer.",
   "homepage": "https://pext.hackerchick.me/",
   "license": "GPL-3.0+",
   "git_urls": [
-    "https://github.com/Pext/pext_module_launcher",
-    "https://notabug.org/Pext/pext_module_launcher"
+    "https://github.com/Pext/pext_module_launcher"
   ],
   "platforms": [
     "Linux",
