@@ -7,6 +7,11 @@
   "git_urls": [
     "https://github.com/Pext/pext_module_launcher"
   ],
+  "settings": [{
+    "name": "use_path",
+    "description": "Use $PATH as primary source of applications instead of as fallback.",
+    "default": "no"
+  }],
   "platforms": [
     "Linux",
     "Darwin",
