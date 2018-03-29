@@ -1,4 +1,5 @@
 {
+  "id": "pext.module.launcher",
   "name": "App Launcher",
   "developer": "Sylvia van Os (Pext lead developer)",
   "description": "Allows Pext to launch applications from your computer.",
