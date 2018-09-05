@@ -50,7 +50,16 @@ class Module(ModuleBase):
 
                 self.executables.append(executable.rstrip('.app'))
         else:
-            for path in environ['PATH'].split(pathsep):
+            if not self.use_path and platform.system() == 'Windows':
+                paths = []
+                import wmi
+                w = wmi.WMI()
+                for p in w.Win32_Product():
+                    paths.append(p.InstallLocation)
+            else:
+                paths = environ['PATH'].split(pathsep)
+
+            for path in paths:
                 path = expanduser(path)
                 try:
                     for executable in listdir(path):
