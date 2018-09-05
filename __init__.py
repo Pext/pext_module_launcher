@@ -30,7 +30,7 @@ from pext_helpers import Action
 
 class Module(ModuleBase):
     def init(self, settings, q):
-        self.use_path = False if ('use_path' not in settings) else bool(strtobool(settings['binary']))
+        self.use_path = False if ('use_path' not in settings) else bool(strtobool(settings['use_path']))
 
         self.executables = []
         self.info_panels = {}
