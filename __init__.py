@@ -105,10 +105,15 @@ class Module(ModuleBase):
         if len(selection) == 0:
             self._set_entries()
         elif len(selection) == 1:
-            if not self.use_path and platform.system() == 'Darwin':
-                Popen(["open", "-a", "{}".format(" ".join((selection[0]["value"], selection[0]["args"])))])
+            if self.settings['_api_version'] >= [0, 8, 0]:
+                command = " ".join((selection[0]["value"], selection[0]["args"]))
             else:
-                command = shlex.split(" ".join((selection[0]["value"], selection[0]["args"])))
+                command = selection[0]["value"]
+
+            if not self.use_path and platform.system() == 'Darwin':
+                Popen(["open", "-a", "{}".format(command)])
+            else:
+                command = shlex.split(command)
                 if self.settings['_api_version'] >= [0, 4, 0]:
                     if selection[0]['context_option']:
                         command[0] = selection[0]['context_option']
