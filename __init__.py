@@ -118,7 +118,7 @@ class Module(ModuleBase):
                             except KeyError:
                                 continue
 
-                            # TODO: Accept list of arguments
+                            # Add information about accepted arguments
                             for pattern, info in [(r'(?<!%)%[fF]', '<file name>'),
                                                   (r'(?<!%)%[uU]', '<URL>')]:
                                 command_info, n = subn(pattern, info, command, count=1)
