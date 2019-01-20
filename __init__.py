@@ -170,9 +170,9 @@ class Module(ModuleBase):
 
             if not self.use_path and platform.system() == 'Darwin':
                 if args:
-                    command = ("open", "-a", shlex.quote(command), "--args") + shlex.split(args)
+                    command = ["open", "-a", shlex.quote(command), "--args"] + shlex.split(args)
                 else:
-                    command = ("open", "-a", shlex.quote(command))
+                    command = ["open", "-a", shlex.quote(command)]
                 Popen(command)
             elif not self.use_path and platform.system() == 'Linux':
                 # TODO: Accept list of arguments
