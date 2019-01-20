@@ -43,7 +43,7 @@ class Module(ModuleBase):
         self.q = q
 
         if self.settings['_api_version'] < [0, 8, 0]:
-            self.q.put([Action.critical_error, "API version is not supported"])
+            self.q.put([Action.critical_error, "API version 0.8.0 or higher is required."])
 
         self._get_entries()
 
