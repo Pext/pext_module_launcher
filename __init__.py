@@ -111,6 +111,9 @@ class Module(ModuleBase):
                     directory = join(expanduser(directory), 'applications')
                     try:
                         for desktop_entry in listdir(directory):
+                            if not desktop_entry.endswith('.desktop'):
+                                continue
+
                             desktop_entry = join(directory, desktop_entry)
 
                             try:
