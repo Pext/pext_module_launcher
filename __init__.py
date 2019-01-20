@@ -49,7 +49,7 @@ class Module(ModuleBase):
 
     @staticmethod
     def parse_desktop_entry(path):
-        parser = configparser.RawConfigParser()
+        parser = configparser.RawConfigParser(strict=False)
         parser.read(path)
 
         app = parser['Desktop Entry']['Name']
