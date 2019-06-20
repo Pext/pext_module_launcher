@@ -97,7 +97,9 @@ class Module(ModuleBase):
                     if not executable.endswith('.app'):
                         continue
 
-                    self.executables.append(executable.rstrip('.app'))
+                    app_name = executable.rstrip('.app')
+                    self.executables.append(app_name)
+                    self.context_menus[app_name] = [executable]
         elif platform.system() == 'Linux':
             if self.use_path:
                 self.get_executables()
