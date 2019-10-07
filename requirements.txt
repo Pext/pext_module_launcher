@@ -1,1 +1,1 @@
-WMI==1.4.9
+WMI==1.4.9; sys.platform == 'win32'
