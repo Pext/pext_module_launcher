@@ -11,7 +11,8 @@
   "settings": [{
     "name": "use_path",
     "description": "Use $PATH as primary source of applications instead of as fallback.",
-    "default": "no"
+    "options": ["Yes", "No"],
+    "default": "No"
   }],
   "platforms": [
     "Linux",
