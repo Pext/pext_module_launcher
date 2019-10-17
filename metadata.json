@@ -8,6 +8,8 @@
   "git_urls": [
     "https://github.com/Pext/pext_module_launcher"
   ],
+  "bugtracker": "https://github.com/Pext/pext_module_launcher",
+  "bugtracker_type": "github",
   "settings": [{
     "name": "use_path",
     "description": "Use $PATH as primary source of applications instead of as fallback.",
