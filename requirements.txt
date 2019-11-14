@@ -1,2 +1,2 @@
 WMI==1.4.9; sys.platform == 'win32'
-pywin32==226; sys.platform == 'win32'
+pywin32==227; sys.platform == 'win32'
