@@ -8,6 +8,7 @@
   "git_urls": [
     "https://github.com/Pext/pext_module_launcher"
   ],
+  "git_branch_stable": "stable",
   "bugtracker": "https://github.com/Pext/pext_module_launcher",
   "bugtracker_type": "github",
   "settings": [{
